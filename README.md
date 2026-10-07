@@ -3,7 +3,7 @@
 <!-- Logo provisório -->
 <img src="docs/assets/logo.png" alt="Logo do Grimrend" width="560">
 
-# Grimrend *(título provisório)*
+# Grimrend *(título e logo provisório)*
 
 **Um action roguelite 2D top-down de dark fantasy, com hordas, progressão viciante e combate brutal.**
 
@@ -74,8 +74,8 @@ O software escolhido é um **jogo digital**, desenvolvido por uma única pessoa,
 - **Fases com checkpoint:** o início de cada fase é um checkpoint. Uma fase pode ter um boss, mais de um ou nenhum.
 - **Conclusão da fase:** o jogador precisa chegar a um ponto de saída, liberado ao cumprir os objetivos da fase (derrotar um boss, realizar ações específicas, eliminar todos os inimigos, etc.). Depois de cumprir os objetivos, o jogador pode continuar na fase ganhando XP antes de sair.
 - **Equipamento por fase:** ao entrar em uma nova fase, o equipamento volta ao padrão daquela fase (não carrega o que foi usado na anterior). Cada fase funciona como uma mini-partida: começar fraco, evoluir, se sentir forte e encontrar um novo obstáculo.
-- **Habilidades temporárias:** obtidas ao subir de nível pela árvore de habilidades da partida (melhorias e novas habilidades); valem apenas na fase atual.
-- **Habilidades permanentes:** concedidas como pontos permanentes ao cumprir objetivos específicos (bosses derrotados, fases concluídas). O ponto é concedido uma única vez por objetivo; repetir a fase não concede de novo. Uma fase pode conceder vários pontos (a quantidade será definida depois). Os pontos podem ser gastos a qualquer momento pelo menu de habilidades.
+- **Habilidades temporárias:** os pontos de habilidade ganhos ao subir de nível são gastos na árvore de habilidades (melhorias e novas habilidades); valem apenas na fase atual.
+- **Habilidades permanentes:** concedidas como pontos permanentes ao cumprir objetivos específicos (bosses derrotados, fases concluídas). O ponto é concedido uma única vez por objetivo; repetir a fase não concede de novo. Uma fase pode conceder vários pontos (a quantidade será definida depois). Os pontos podem ser gastos a qualquer momento da partida, na área de habilidades permanentes da árvore de habilidades (aberta pelo menu de pausa).
 - **Morte não punitiva:** ao morrer, o jogador volta ao início da fase atual, mantendo os pontos permanentes já conquistados (gastos ou não), voltando mais forte.
 - **Nível e XP:** resetam a cada fase. Apenas os pontos permanentes (e as habilidades permanentes adquiridas com eles) são mantidos.
 - **Salvamento:** no MVP, automático (periodicamente e ao concluir objetivos específicos). Registra o progresso geral, como a fase atual, os pontos permanentes e os objetivos já concluídos. O salvamento manual de verdade (em qualquer momento) e a retomada da fase exatamente de onde parou ficam para depois do MVP.
@@ -86,6 +86,21 @@ O software escolhido é um **jogo digital**, desenvolvido por uma única pessoa,
 - **HUD moderna:** barra de vida comprida e estilizada (vermelha), posicionada em um canto da tela junto com as demais informações (nível/XP, munição). Evita HUD pixelada, centralizada ou apenas com números.
 - **Números de dano flutuantes** ao causar dano, com destaque visual para dano crítico e para cada tipo de dano. Valores grandes são abreviados (estilo jogos idle, ex.: 1,2K, 3,4M). Debuffs estão previstos para depois do MVP.
 
+### Menus e navegação *(versão atual, sujeita a mudanças)*
+
+| Menu | No MVP | Depois do MVP |
+|---|---|---|
+| Menu principal | Novo jogo, Continuar (abre o último save) e Sair do jogo | Carregar jogo (escolher entre vários saves) e Configurações |
+| Menu de pausa (durante a partida) | Retomar, Árvore de habilidades, Ajustar volume, Voltar ao menu principal e Sair do jogo | Configurações e Status completo do personagem |
+| Seleção de fase | – | Escolher qual fase jogar, usando os dados de um save |
+| Configurações | – | Áudio detalhado (no MVP há só um controle simples de volume no menu de pausa), gráficos, jogabilidade e comandos (teclas, controle e mouse), no menu principal e no de pausa |
+
+- **Árvore de habilidades:** é ramificada. O jogador começa em pontos específicos e vai liberando as habilidades vizinhas. As habilidades temporárias ficam na árvore principal, e as permanentes, que o jogador pode adquirir e melhorar, aparecem em uma área separada (por exemplo, na parte de baixo da tela). A árvore só pode ser aberta pelo menu de pausa, dentro de uma partida com save válido, e **nunca pelo menu principal**.
+- **Continuar:** carrega o último save (no MVP, o automático; depois, o último entre manual e automático). **Novo jogo** cria um novo save; se já existir um save, o jogo pede confirmação antes de sobrescrevê-lo (há um único save no MVP).
+- **Sair do jogo:** fecha o jogo e volta direto para o desktop, tanto pelo menu principal quanto pelo de pausa.
+- **Voltar ao menu principal** e **Sair do jogo** (pelo menu de pausa): como o estado no meio da fase não é salvo no MVP, o jogo avisa antes que o progresso da fase atual será perdido, e ao continuar depois o jogador retoma do início da fase.
+- **Seleção de fase** (futuro): permite revisitar fases usando os dados de um save, trocar itens de conta permanentes no início da missão ou na base e farmar moedas. Ela também abre caminho para desbloqueios de endgame, como o New Game+.
+
 ## Escopo do MVP
 
 O MVP deve responder uma pergunta: **o núcleo do jogo é divertido?** Ele inclui somente:
@@ -95,12 +110,14 @@ O MVP deve responder uma pergunta: **o núcleo do jogo é divertido?** Ele inclu
 | Jogador | Movimento, mira manual com o mouse, barra de HP, munição |
 | Combate | 4 armas básicas (corpo a corpo e de fogo) |
 | Inimigos | 5 tipos de inimigos com comportamentos simples |
-| Progressão | Sistema de XP, níveis e árvore de habilidades simples (6 temporárias e 4 permanentes) |
+| Progressão | Sistema de XP, níveis e árvore de habilidades ramificada simples (6 temporárias e 4 permanentes) |
 | Conteúdo | 3 fases, 2 mini bosses e 1 boss |
-| Fluxo | Menu principal, checkpoint no início de cada fase, tela de morte e reinício da fase |
+| Menus | Menu principal (Novo jogo, Continuar, Sair do jogo) e menu de pausa (retomar, árvore de habilidades, ajustar volume, voltar ao menu principal, sair do jogo) |
+| Fluxo | Checkpoint no início de cada fase, tela de morte e reinício da fase |
 | Drops | Armas encontradas no caminho |
 | Interface | HUD moderna: barra de vida e demais informações em um canto da tela |
 | Feedback de combate | Números de dano flutuantes, com abreviação de valores grandes |
+| Som | Sons básicos (ataques, dano e interface) e controle simples de volume no menu de pausa |
 | Dano | Dano crítico e dois tipos de dano: físico e fogo |
 | Save | Salvamento automático (periódico e ao concluir objetivos) |
 
@@ -109,11 +126,13 @@ O MVP deve responder uma pergunta: **o núcleo do jogo é divertido?** Ele inclu
 - [ ] As 3 fases puderem ser jogadas do início ao fim, com checkpoint no início de cada uma.
 - [ ] Existirem 5 tipos de inimigos, 2 mini bosses e 1 boss.
 - [ ] Existirem 4 armas utilizáveis (corpo a corpo e de fogo).
-- [ ] O jogador subir de nível, escolher habilidades e gastar pontos permanentes.
+- [ ] O jogador subir de nível e gastar pontos na árvore de habilidades (temporárias e permanentes) pelo menu de pausa.
+- [ ] O menu principal (Novo jogo, Continuar, Sair do jogo) e o menu de pausa funcionarem.
+- [ ] O jogo tiver sons básicos (ataques, dano e interface) e controle de volume no menu de pausa.
 - [ ] A HUD, os números de dano, o dano crítico e os dois tipos de dano (físico e fogo) funcionarem.
 - [ ] O progresso for salvo automaticamente.
 
-**Fora do MVP, de propósito:** base principal, moedas (*coins*), traders, NPCs, armas automáticas, lore e diálogos, desmembramento, buffs e debuffs. Tudo isso está listado abaixo.
+**Fora do MVP, de propósito:** base principal, moedas (*coins*), traders, NPCs, armas automáticas, lore e diálogos, desmembramento, buffs e debuffs, além de carregar jogo, configurações completas, status completo do personagem, seleção de fase e trilha musical. Tudo isso está listado abaixo.
 
 ## Funcionalidades futuras (pós-MVP)
 
@@ -129,6 +148,11 @@ Planejadas, mas **não** fazem parte do MVP:
 - **Mais tipos de inimigos, armas, habilidades e builds**, além de mais bosses e mini bosses.
 - **Personalização** do personagem e, talvez, mais de um personagem jogável (a avaliar, pois aumenta bastante a complexidade).
 - **Salvamento manual** em qualquer momento e **retomar a fase exatamente de onde parou**, salvando o estado completo da fase no meio da partida.
+- **Carregar jogo** (vários saves, junto com o salvamento manual); a opção **Continuar** passa a abrir o último save, manual ou automático.
+- **Menu de configurações** (no menu principal e no de pausa), com submenus de áudio, gráficos, jogabilidade e comandos (teclas, controle e mouse).
+- **Status completo do personagem**, com os valores já calculados, acessível pelo menu de pausa.
+- **Seleção de fase**: escolher qual fase jogar usando os dados de um save, para revisitar fases, trocar itens de conta permanentes no início da missão ou na base e farmar moedas.
+- **New Game+** e outros desbloqueios de endgame.
 - **Suporte a controle** (gamepad) e possível compatibilidade com Steam Deck.
 - **Conquistas, trilha sonora e efeitos sonoros** mais elaborados.
 
@@ -142,7 +166,9 @@ Quando finalizado, o jogo completo terá:
 - Progressão por XP, níveis, habilidades e builds variadas.
 - Base principal com NPCs, traders, personalização e funcionalidades extras.
 - Lore simples com diálogos.
-- Salvamento automático e manual.
+- Salvamento automático e manual, com carregar jogo e continuar.
+- Menus completos: configurações, status do personagem e seleção de fase.
+- New Game+ e desbloqueios de endgame.
 - Sistema de gore e desmembramento com efeitos de gameplay.
 - Sistema de buffs e debuffs.
 - Lançamento na **Steam para Windows**, com preço de jogo indie de baixo orçamento.
@@ -160,18 +186,24 @@ Ports para outras plataformas só serão considerados dependendo do sucesso do l
 | RF03 | O jogo deve exibir HP e munição do jogador |
 | RF04 | O jogo deve gerar inimigos em quantidade e variedade crescentes |
 | RF05 | O jogador deve ganhar XP ao derrotar inimigos e subir de nível |
-| RF06 | O jogador deve poder escolher habilidades ao subir de nível |
+| RF06 | O jogador deve ganhar pontos de habilidade ao subir de nível e gastá-los na árvore de habilidades (habilidades temporárias) |
 | RF07 | O jogo deve ter fases com mini bosses e um boss |
 | RF08 | O jogador deve poder encontrar armas durante a partida |
 | RF09 | O jogo deve exibir tela de morte e permitir reiniciar |
-| RF10 | O jogo deve ter menu principal (jogar, sair) |
+| RF10 | O jogo deve ter menu principal com Novo jogo, Continuar (último save) e Sair do jogo |
 | RF11 | O jogo deve exibir uma HUD moderna com barra de vida, XP/nível e munição |
 | RF12 | O jogo deve exibir números de dano flutuantes ao causar dano |
 | RF13 | Cada fase deve ter checkpoint no início, e o jogador deve reiniciar a fase atual ao morrer |
 | RF14 | O jogador deve receber pontos de habilidade permanentes ao cumprir objetivos específicos |
-| RF15 | O jogador deve poder gastar pontos permanentes a qualquer momento pelo menu de habilidades |
+| RF15 | O jogador deve poder gastar pontos permanentes na árvore de habilidades, pelo menu de pausa, a qualquer momento da partida |
 | RF16 | O jogo deve ter dano crítico e dois tipos de dano (físico e fogo), com feedback visual distinto |
 | RF17 | O jogo deve salvar o progresso automaticamente (periodicamente e ao concluir objetivos) |
+| RF18 | O jogador deve poder pausar a partida e acessar o menu de pausa (árvore de habilidades, ajuste de volume, voltar ao menu principal e sair do jogo) |
+| RF19 | A árvore de habilidades só deve ser acessível dentro de uma partida com save válido, nunca pelo menu principal |
+| RF20 | O jogo deve reproduzir sons básicos (ataques, dano e interface) |
+| RF21 | O jogador deve poder ajustar o volume geral pelo menu de pausa |
+| RF22 | Ao iniciar um Novo jogo com um save existente, o jogo deve pedir confirmação antes de sobrescrevê-lo |
+| RF23 | Ao voltar ao menu principal ou sair durante uma fase, o jogo deve avisar que o progresso da fase atual será perdido |
 
 ### Requisitos não funcionais
 
@@ -212,15 +244,15 @@ A metodologia do projeto será **ágil**, em formato **Kanban**, com ciclos curt
 
 - [ ] **v0.1 – Núcleo jogável:** movimento, mira com mouse, uma arma corpo a corpo e uma de fogo, 2 ou 3 inimigos, HP e munição, HUD moderna, números de dano flutuantes, dano crítico e dois tipos de dano (físico e fogo), morte e reinício.
 - [ ] **v0.2 – Progressão e variedade:** XP, níveis, árvore de habilidades simples (temporárias e permanentes), inimigos até chegar a 5 tipos, drops de armas (4 armas no total), salvamento automático.
-- [ ] **v0.3 – Conteúdo do MVP:** 3 fases com checkpoint, 2 mini bosses, 1 boss, menu principal. **Fim do MVP.**
+- [ ] **v0.3 – Conteúdo do MVP:** 3 fases com checkpoint, 2 mini bosses, 1 boss, menu principal e menu de pausa, sons básicos e controle de volume. **Fim do MVP.**
 
 ### Pós-MVP
 
-- [ ] **v0.4 – Economia e base:** moedas, base principal e traders.
+- [ ] **v0.4 – Economia e base:** moedas, base principal, traders, seleção de fase e itens de conta permanentes.
 - [ ] **v0.5 – Narrativa:** NPCs, diálogos e lore simples.
 - [ ] **v0.6 – Brutalidade:** desmembramento, efeitos visuais de gore, buffs e debuffs.
-- [ ] **v0.7 – Endgame:** armas automatizadas, mais armas e mais bosses.
-- [ ] **v0.8 – Polimento:** balanceamento, sons, trilha, suporte a controle, salvamento manual.
+- [ ] **v0.7 – Endgame:** armas automatizadas, mais armas, mais bosses e New Game+.
+- [ ] **v0.8 – Polimento:** balanceamento, trilha musical, sons mais elaborados, suporte a controle, salvamento manual, carregar jogo, configurações e status do personagem.
 - [ ] **v1.0 – Lançamento:** publicação na Steam (Windows).
 
 ## Estrutura do repositório
@@ -244,7 +276,7 @@ A organização interna de `src/` (scripts, prefabs, cenas, arte e áudio) será
 
 | Artefato | Local | Status |
 |---|---|---|
-| Diagrama de casos de uso (PDF) | `docs/diagrams/` | A fazer |
+| Diagrama de casos de uso (PDF) | `docs/diagrams/` | Rascunho |
 | Diagrama de sequência (Mermaid) | `docs/diagrams/` | A fazer |
 | Diagrama de atividades | `docs/diagrams/` | A fazer |
 | Modelo de dados (planilha) | `docs/database/` | A fazer |
