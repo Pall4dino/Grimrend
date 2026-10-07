@@ -8,12 +8,12 @@
 **Um action roguelite 2D top-down de dark fantasy, com hordas, progressão viciante e combate brutal.**
 
 ![Unity](https://img.shields.io/badge/Unity-000000?style=for-the-badge&logo=unity&logoColor=white)
-![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-239120?style=for-the-badge)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
-![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)
+![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNmZmZmZmYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHBhdGggZD0iTTE2IDN2MThsNCAtMi41di0xM3oiPjwvcGF0aD48cGF0aCBkPSJNOS4xNjUgMTMuOTAzbC00LjE2NSAzLjU5N2wtMiAtMWw0LjMzMyAtNC41bTEuNzM1IC0xLjgwMmw2LjkzMiAtNy4xOTh2NWwtNC43OTUgNC4xNDEiPjwvcGF0aD48cGF0aCBkPSJNMTYgMTYuNWwtMTEgLTEwbC0yIDFsMTMgMTMuNSI%2BPC9wYXRoPjwvc3ZnPg%3D%3D)
 ![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?style=for-the-badge&logo=mermaid&logoColor=white)
-![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNmZmZmZmYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDQ0OCA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHBhdGggZD0iTTAgOTMuN2wxODMuNi0yNS4zdjE3Ny40SDBWOTMuN3ptMCAzMjQuNmwxODMuNiAyNS4zVjI2OC40SDB2MTQ5Ljl6bTIwMy44IDI4TDQ0OCA0ODBWMjY4LjRIMjAzLjh2MTc3Ljl6bTAtMzgwLjZ2MTgwLjFINDQ4VjMyTDIwMy44IDY1Ljd6Ij48L3BhdGg%2BPC9zdmc%2B)
 ![Steam](https://img.shields.io/badge/Steam-planejado-000000?style=for-the-badge&logo=steam&logoColor=white)
 
 ![Status](https://img.shields.io/badge/status-em_planejamento-yellow)
@@ -220,10 +220,11 @@ Ports para outras plataformas só serão considerados dependendo do sucesso do l
 | Tecnologia | Uso |
 |---|---|
 | ![Unity](https://img.shields.io/badge/Unity-000000?logo=unity&logoColor=white) | Engine do jogo (versão gratuita) |
-| ![C#](https://img.shields.io/badge/C%23-239120?logo=csharp&logoColor=white) | Linguagem de programação |
+| ![C#](https://img.shields.io/badge/C%23-239120) | Linguagem de programação |
 | ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white) | Versionamento e hospedagem do repositório |
-| ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?logo=visualstudiocode&logoColor=white) | Editor de código *(ou Visual Studio / Rider)* |
-| ![Windows](https://img.shields.io/badge/Windows-0078D6?logo=windows&logoColor=white) | Plataforma de destino do jogo (PC) |
+| ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?logo=data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNmZmZmZmYiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIgdmlld0JveD0iMCAwIDI0IDI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHBhdGggZD0iTTE2IDN2MThsNCAtMi41di0xM3oiPjwvcGF0aD48cGF0aCBkPSJNOS4xNjUgMTMuOTAzbC00LjE2NSAzLjU5N2wtMiAtMWw0LjMzMyAtNC41bTEuNzM1IC0xLjgwMmw2LjkzMiAtNy4xOTh2NWwtNC43OTUgNC4xNDEiPjwvcGF0aD48cGF0aCBkPSJNMTYgMTYuNWwtMTEgLTEwbC0yIDFsMTMgMTMuNSI%2BPC9wYXRoPjwvc3ZnPg%3D%3D) | Editor de código *(ou Visual Studio / Rider)* |
+| ![Windows](https://img.shields.io/badge/Windows-0078D6?logo=data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNmZmZmZmYiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDQ0OCA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI%2BPHBhdGggZD0iTTAgOTMuN2wxODMuNi0yNS4zdjE3Ny40SDBWOTMuN3ptMCAzMjQuNmwxODMuNiAyNS4zVjI2OC40SDB2MTQ5Ljl6bTIwMy44IDI4TDQ0OCA0ODBWMjY4LjRIMjAzLjh2MTc3Ljl6bTAtMzgwLjZ2MTgwLjFINDQ4VjMyTDIwMy44IDY1Ljd6Ij48L3BhdGg%2BPC9zdmc%2B) | Sistema operacional de destino do jogo (PC) |
+| ![Steam](https://img.shields.io/badge/Steam-000000?logo=steam&logoColor=white) | Plataforma de distribuição e lançamento do jogo (planejado) |
 | ![Mermaid](https://img.shields.io/badge/Mermaid-FF3670?logo=mermaid&logoColor=white) | Diagramas UML em Markdown (sequência e atividades); casos de uso em PDF |
 
 ### Armazenamento de dados
@@ -321,3 +322,5 @@ A organização interna de `src/` (scripts, prefabs, cenas, arte e áudio) será
 **Yuri Palladino** · [@Pall4dino](https://github.com/Pall4dino)
 
 Projeto individual desenvolvido para a disciplina de Engenharia de Software.
+
+---
