@@ -277,14 +277,24 @@ A organização interna de `src/` (scripts, prefabs, cenas, arte e áudio) será
 
 | Artefato | Local | Status |
 |---|---|---|
-| Diagrama de casos de uso (PDF) | `docs/diagrams/` | Rascunho |
-| Diagrama de sequência (Mermaid) | `docs/diagrams/` | A fazer |
-| Diagrama de atividades | `docs/diagrams/` | A fazer |
+| Diagrama de casos de uso (PDF) | [`docs/diagrams/casos-de-uso.pdf`](docs/diagrams/casos-de-uso.pdf) | Rascunho |
+| Diagrama de sequência (Mermaid) | [`docs/diagrams/diagrama-de-sequencia.md`](docs/diagrams/diagrama-de-sequencia.md) | Rascunho |
+| Diagramas de atividades (Mermaid) | [`docs/diagrams/diagrama-de-atividades.md`](docs/diagrams/diagrama-de-atividades.md) | Rascunho |
 | Modelo de dados (planilha) | `docs/database/` | A fazer |
 | Protótipo de telas | `docs/prototype/` | A fazer |
 | Roadmap do MVP | Este README | Rascunho |
 | Metodologia | Este README | Rascunho |
-| Registros de decisões (ADR) | `docs/decisoes/` | Rascunho |
+| Registros de decisões (ADR) | [`docs/decisoes/`](docs/decisoes/) | Rascunho |
+
+### Diagramas UML
+
+Os diagramas ficam em [`docs/diagrams/`](docs/diagrams/) e cobrem apenas o escopo do MVP:
+
+- **[Casos de uso](docs/diagrams/casos-de-uso.pdf)** (PDF): quem faz o quê no sistema, incluindo o menu principal, a partida, o menu de pausa, a árvore de habilidades e o salvamento. Cada caso de uso indica os requisitos funcionais relacionados.
+- **[Sequência](docs/diagrams/diagrama-de-sequencia.md)** (Mermaid): como os menus, o controle do jogo, o personagem, os inimigos, a progressão e o save trocam mensagens, do início do jogo até o fim de uma fase.
+- **[Atividades](docs/diagrams/diagrama-de-atividades.md)** (Mermaid): o fluxo de atividades do menu principal até o fim da fase, dividido em fluxo geral, "jogar a fase" e menu de pausa.
+
+Os diagramas em Mermaid são exibidos automaticamente pelo GitHub.
 
 ## Boas práticas e desenvolvimento seguro
 
@@ -320,7 +330,5 @@ A organização interna de `src/` (scripts, prefabs, cenas, arte e áudio) será
 ## Autor
 
 **Yuri Palladino** · [@Pall4dino](https://github.com/Pall4dino)
-
-Projeto individual desenvolvido para a disciplina de Engenharia de Software.
 
 ---
