@@ -12,7 +12,7 @@ Este diagrama mostra como o Grimrend deve se comportar, do menu principal até o
 | Personagem | Personagem controlado pelo jogador (movimento, mira, ataque e vida) |
 | Inimigos | Inimigos, mini bosses e boss da fase |
 | Progressão (XP e habilidades) | XP, níveis, pontos de habilidade e habilidades temporárias e permanentes |
-| Sistema de save | Salvamento automático do progresso geral |
+| Sistema de save | Salvamento automático do progresso do jogador (fase, nível, XP, habilidades, equipamento e objetivos) |
 
 ## Diagrama
 
@@ -39,12 +39,17 @@ sequenceDiagram
         GM->>S: Cria o save inicial
     else Continuar
         UI->>S: Carrega o último save
-        S-->>GM: Fase atual, pontos permanentes e objetivos concluídos
+        S-->>GM: Progresso completo (fase, nível, XP, habilidades, equipamento e objetivos)
     end
 
     Note over J,S: 2. Início da fase (checkpoint)
-    GM->>PR: Zera nível e XP e aplica as habilidades permanentes
-    GM->>P: Cria o personagem com o equipamento padrão da fase
+    alt Novo jogo, morte ou nova fase
+        GM->>PR: Zera nível e XP e aplica as habilidades permanentes
+        GM->>P: Cria o personagem com o equipamento padrão da fase e vida cheia
+    else Continuar
+        GM->>PR: Restaura nível, XP e habilidades salvos
+        GM->>P: Cria o personagem com o equipamento salvo e vida cheia (máximo atual)
+    end
     GM->>E: Gera os inimigos da fase
     GM->>UI: Exibe a HUD (vida, XP e munição)
 
@@ -81,37 +86,41 @@ sequenceDiagram
                 J->>UI: Escolhe uma habilidade (temporária ou permanente)
                 UI->>PR: Gasta o ponto e aplica a habilidade
                 PR-->>P: Atualiza os atributos
+                J->>UI: Retoma a partida
             else Ajusta o volume
                 J->>UI: Altera o volume geral
+                J->>UI: Retoma a partida
             else Volta ao menu principal ou sai do jogo
-                UI->>J: Avisa que o progresso da fase será perdido
+                UI->>J: Avisa que, ao continuar, a fase recomeça do início
                 J->>UI: Confirma
+                UI->>S: Salva o progresso (fase, nível, XP, habilidades, equipamento e objetivos)
                 UI->>GM: Encerra a partida
-                Note over GM,S: Ao continuar, o jogador retoma do início da fase
+                Note over GM,S: Ao continuar, o jogador retoma do início da fase com todo o progresso salvo
             end
-            J->>UI: Retoma a partida
         end
     end
 
     Note over J,S: 4. Fim da fase
     alt O jogador morre
         P-->>GM: Vida chega a zero
+        GM->>S: Atualiza o save com o progresso temporário zerado
         GM->>UI: Exibe a tela de morte
         J->>UI: Escolhe reiniciar a fase
         UI->>GM: Reinicia a fase atual
-        Note over GM,PR: Volta ao checkpoint, mantendo os pontos permanentes
+        Note over GM,PR: Volta ao checkpoint com nível, XP e habilidades temporárias zerados, mantendo os pontos permanentes
     else O jogador chega à saída liberada
         J->>P: Alcança o ponto de saída
-        GM->>S: Salva automaticamente
         GM->>PR: Zera nível e XP
         GM->>P: Restaura o equipamento padrão da próxima fase
+        GM->>S: Salva automaticamente (fase concluída e início da próxima)
         Note over GM,PR: Começa a próxima fase com novo checkpoint
     end
 ```
 
 ## Observações
 
-- O salvamento é automático no MVP e guarda o progresso geral (fase atual, pontos permanentes e objetivos concluídos). O estado no meio da fase não é salvo.
-- Ao morrer, o jogador volta ao início da fase atual, mantendo os pontos permanentes.
+- O salvamento automático ocorre periodicamente, ao concluir objetivos, ao voltar ao menu principal ou sair e ao morrer. Ele guarda todo o progresso do jogador, mas não a posição, o estado exato da fase nem a vida atual.
+- Ao continuar, o jogador retoma do início da fase com o progresso salvo e com a vida cheia, de acordo com o máximo atual.
+- Ao morrer, nível, XP e habilidades temporárias são zerados, e os pontos permanentes são mantidos.
 - Ao concluir uma fase, o equipamento volta ao padrão da próxima fase, e nível e XP são zerados.
 - Itens fora do MVP (base, moedas, traders, salvamento manual, configurações, seleção de fase) não aparecem neste diagrama.
