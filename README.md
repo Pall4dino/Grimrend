@@ -75,10 +75,10 @@ O software escolhido é um **jogo digital**, desenvolvido por uma única pessoa,
 - **Conclusão da fase:** o jogador precisa chegar a um ponto de saída, liberado ao cumprir os objetivos da fase (derrotar um boss, realizar ações específicas, eliminar todos os inimigos, etc.). Depois de cumprir os objetivos, o jogador pode continuar na fase ganhando XP antes de sair.
 - **Equipamento por fase:** ao entrar em uma nova fase, o equipamento volta ao padrão daquela fase (não carrega o que foi usado na anterior). Cada fase funciona como uma mini-partida: começar fraco, evoluir, se sentir forte e encontrar um novo obstáculo.
 - **Habilidades temporárias:** os pontos de habilidade ganhos ao subir de nível são gastos na árvore de habilidades (melhorias e novas habilidades); valem apenas na fase atual.
-- **Habilidades permanentes:** concedidas como pontos permanentes ao cumprir objetivos específicos (bosses derrotados, fases concluídas). O ponto é concedido uma única vez por objetivo; repetir a fase não concede de novo. Uma fase pode conceder vários pontos (a quantidade será definida depois). Os pontos podem ser gastos a qualquer momento da partida, na área de habilidades permanentes da árvore de habilidades (aberta pelo menu de pausa).
-- **Morte não punitiva:** ao morrer, o jogador volta ao início da fase atual, mantendo os pontos permanentes já conquistados (gastos ou não), voltando mais forte.
-- **Nível e XP:** resetam a cada fase. Apenas os pontos permanentes (e as habilidades permanentes adquiridas com eles) são mantidos.
-- **Salvamento:** no MVP, automático (periodicamente e ao concluir objetivos específicos). Registra o progresso geral, como a fase atual, os pontos permanentes e os objetivos já concluídos. O salvamento manual de verdade (em qualquer momento) e a retomada da fase exatamente de onde parou ficam para depois do MVP.
+- **Habilidades permanentes:** concedidas como pontos permanentes ao cumprir objetivos específicos (bosses derrotados, fases concluídas). O ponto é concedido uma única vez por objetivo; repetir a fase não concede de novo, mas os objetivos precisam ser cumpridos outra vez para liberar a saída. Uma fase pode conceder vários pontos (a quantidade será definida depois). Os pontos podem ser gastos a qualquer momento da partida, na área de habilidades permanentes da árvore de habilidades (aberta pelo menu de pausa).
+- **Morte não punitiva:** ao morrer, o jogador volta ao início da fase atual, com o equipamento padrão da fase e com nível, XP e habilidades temporárias zerados, mas mantendo os pontos permanentes já conquistados (gastos ou não), o que o deixa mais forte na nova tentativa.
+- **Nível e XP:** resetam ao avançar para uma nova fase e ao morrer, e só nessas situações. Sair do jogo e voltar não zera nada. Nesses resets, apenas os pontos permanentes (e as habilidades permanentes adquiridas com eles) são mantidos.
+- **Salvamento:** no MVP, automático (periodicamente, ao concluir objetivos específicos e ao voltar ao menu principal ou sair do jogo). Registra todo o progresso do jogador: fase atual, nível, XP, habilidades temporárias e permanentes, pontos disponíveis, equipamento e objetivos já concluídos. Não registra a posição do jogador, o estado exato da fase (inimigos, projéteis etc.) nem a vida atual. Ao continuar, o jogador retoma do início da fase atual com todo esse progresso e com a vida cheia, de acordo com o máximo atual (que pode incluir bônus de habilidades temporárias). Ao morrer, o save é atualizado com o progresso temporário zerado. O salvamento manual de verdade (em qualquer momento) e a retomada da fase exatamente de onde parou ficam para depois do MVP.
 - **Evolução futura:** progressão híbrida, com base, moedas e melhorias permanentes, além da escolha do equipamento inicial entre os já desbloqueados.
 
 ### Interface e feedback de combate
@@ -96,9 +96,9 @@ O software escolhido é um **jogo digital**, desenvolvido por uma única pessoa,
 | Configurações | – | Áudio detalhado (no MVP há só um controle simples de volume no menu de pausa), gráficos, jogabilidade e comandos (teclas, controle e mouse), no menu principal e no de pausa |
 
 - **Árvore de habilidades:** é ramificada. O jogador começa em pontos específicos e vai liberando as habilidades vizinhas. As habilidades temporárias ficam na árvore principal, e as permanentes, que o jogador pode adquirir e melhorar, aparecem em uma área separada (por exemplo, na parte de baixo da tela). A árvore só pode ser aberta pelo menu de pausa, dentro de uma partida com save válido, e **nunca pelo menu principal**.
-- **Continuar:** carrega o último save (no MVP, o automático; depois, o último entre manual e automático). **Novo jogo** cria um novo save; se já existir um save, o jogo pede confirmação antes de sobrescrevê-lo (há um único save no MVP).
+- **Continuar:** carrega o último save e retoma a partida no início da fase atual, com todo o progresso salvo (no MVP, o save automático; depois, o último entre manual e automático). **Novo jogo** cria um novo save; se já existir um save, o jogo pede confirmação antes de sobrescrevê-lo (há um único save no MVP).
 - **Sair do jogo:** fecha o jogo e volta direto para o desktop, tanto pelo menu principal quanto pelo de pausa.
-- **Voltar ao menu principal** e **Sair do jogo** (pelo menu de pausa): como o estado no meio da fase não é salvo no MVP, o jogo avisa antes que o progresso da fase atual será perdido, e ao continuar depois o jogador retoma do início da fase.
+- **Voltar ao menu principal** e **Sair do jogo** (pelo menu de pausa): o jogo salva o progresso antes de sair. Como a posição e o estado exato da fase não são salvos no MVP, o jogo avisa antes que, ao continuar, o jogador retomará do início da fase atual.
 - **Seleção de fase** (futuro): permite revisitar fases usando os dados de um save, trocar itens de conta permanentes no início da missão ou na base e farmar moedas. Ela também abre caminho para desbloqueios de endgame, como o New Game+.
 
 ## Escopo do MVP
@@ -119,7 +119,7 @@ O MVP deve responder uma pergunta: **o núcleo do jogo é divertido?** Ele inclu
 | Feedback de combate | Números de dano flutuantes, com abreviação de valores grandes |
 | Som | Sons básicos (ataques, dano e interface) e controle simples de volume no menu de pausa |
 | Dano | Dano crítico e dois tipos de dano: físico e fogo |
-| Save | Salvamento automático (periódico e ao concluir objetivos) |
+| Save | Salvamento automático do progresso completo (nível, XP, habilidades e equipamento), periodicamente, ao concluir objetivos e ao sair |
 
 **O MVP estará concluído quando:**
 
@@ -130,7 +130,7 @@ O MVP deve responder uma pergunta: **o núcleo do jogo é divertido?** Ele inclu
 - [ ] O menu principal (Novo jogo, Continuar, Sair do jogo) e o menu de pausa funcionarem.
 - [ ] O jogo tiver sons básicos (ataques, dano e interface) e controle de volume no menu de pausa.
 - [ ] A HUD, os números de dano, o dano crítico e os dois tipos de dano (físico e fogo) funcionarem.
-- [ ] O progresso for salvo automaticamente.
+- [ ] O progresso (inclusive nível, XP e habilidades) for salvo automaticamente, e ao continuar o jogador retomar do início da fase sem perdê-lo.
 
 **Fora do MVP, de propósito:** base principal, moedas (*coins*), traders, NPCs, armas automáticas, lore e diálogos, desmembramento, buffs e debuffs, além de carregar jogo, configurações completas, status completo do personagem, seleção de fase e trilha musical. Tudo isso está listado abaixo.
 
@@ -197,13 +197,16 @@ Ports para outras plataformas só serão considerados dependendo do sucesso do l
 | RF14 | O jogador deve receber pontos de habilidade permanentes ao cumprir objetivos específicos |
 | RF15 | O jogador deve poder gastar pontos permanentes na árvore de habilidades, pelo menu de pausa, a qualquer momento da partida |
 | RF16 | O jogo deve ter dano crítico e dois tipos de dano (físico e fogo), com feedback visual distinto |
-| RF17 | O jogo deve salvar o progresso automaticamente (periodicamente e ao concluir objetivos) |
+| RF17 | O jogo deve salvar o progresso do jogador automaticamente (periodicamente, ao concluir objetivos e ao voltar ao menu principal ou sair), incluindo nível, XP, habilidades e equipamento |
 | RF18 | O jogador deve poder pausar a partida e acessar o menu de pausa (árvore de habilidades, ajuste de volume, voltar ao menu principal e sair do jogo) |
 | RF19 | A árvore de habilidades só deve ser acessível dentro de uma partida com save válido, nunca pelo menu principal |
 | RF20 | O jogo deve reproduzir sons básicos (ataques, dano e interface) |
 | RF21 | O jogador deve poder ajustar o volume geral pelo menu de pausa |
 | RF22 | Ao iniciar um Novo jogo com um save existente, o jogo deve pedir confirmação antes de sobrescrevê-lo |
-| RF23 | Ao voltar ao menu principal ou sair durante uma fase, o jogo deve avisar que o progresso da fase atual será perdido |
+| RF23 | Ao voltar ao menu principal ou sair durante uma fase, o jogo deve avisar que, ao continuar, o jogador retomará do início da fase atual (a posição e o estado exato da fase não são salvos) |
+| RF24 | Nível e XP só devem ser zerados quando o jogador morrer ou avançar de fase, nunca ao sair do jogo e continuar depois |
+| RF25 | Ao continuar, o jogo deve restaurar a vida do personagem ao máximo atual, incluindo bônus de habilidades temporárias |
+| RF26 | Ao morrer, o jogo deve atualizar o save com o progresso temporário zerado |
 
 ### Requisitos não funcionais
 
