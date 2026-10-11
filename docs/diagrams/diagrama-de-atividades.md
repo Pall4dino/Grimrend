@@ -30,21 +30,23 @@ flowchart TD
     M2 -->|"Não"| M4("Criar novo save na fase 1")
     M3 -->|"Sim"| M4
     M3 -->|"Não"| M0
-    M5 -->|"Sim"| M6("Carregar o último save")
+    M5 -->|"Sim"| M6("Carregar o último save (progresso completo)")
     M5 -->|"Não (opção indisponível)"| M0
     M4 --> F0
-    M6 --> F0
+    M6 --> C1("Restaurar nível, XP, habilidades e equipamento salvos")
+    C1 --> F1
 
-    F0("Zerar nível e XP e aplicar as habilidades permanentes") --> F1("Criar o personagem com o equipamento padrão da fase e gerar os inimigos")
+    F0("Zerar nível e XP, aplicar as habilidades permanentes e usar o equipamento padrão da fase") --> F1("Criar o personagem com a vida cheia (máximo atual) e gerar os inimigos")
     F1 --> F2("Exibir a HUD")
     F2 --> J[["Jogar a fase (diagrama 2)"]]
     J --> R{"Resultado da fase"}
 
-    R -->|"Jogador morreu"| D0("Exibir a tela de morte")
+    R -->|"Jogador morreu"| D00("Atualizar o save com o progresso temporário zerado")
+    D00 --> D0("Exibir a tela de morte")
     D0 --> D1("Reiniciar a fase atual (volta ao checkpoint)")
     D1 --> F0
 
-    R -->|"Fase concluída"| E0("Salvar automaticamente a conclusão da fase")
+    R -->|"Fase concluída"| E0("Salvar automaticamente (fase concluída e início da próxima, com nível e XP zerados)")
     E0 --> E1{"Existe uma próxima fase?"}
     E1 -->|"Sim"| F0
     E1 -->|"Não"| E2("Exibir a tela final da campanha (a definir)")
@@ -58,7 +60,7 @@ flowchart TD
     classDef sub fill:#e6f4ea,stroke:#2e7d32,stroke-width:2px,color:#222
     classDef no fill:#000,stroke:#000,color:#000
     class M1,M2,M3,M5,R,E1 decisao
-    class M0,M4,M6,F0,F1,F2,D0,D1,E0,E2 acao
+    class M0,M4,M6,C1,F0,F1,F2,D00,D0,D1,E0,E2 acao
     class J sub
     class Inicio,Fim1,Fim2 no
 ```
@@ -84,7 +86,7 @@ flowchart TD
     P8 -->|"Sim"| P9("Equipar a arma")
     P8 -->|"Não"| P10
     P9 --> P10{"Objetivo da fase cumprido?"}
-    P10 -->|"Sim"| P11("Conceder ponto permanente, salvar automaticamente e liberar a saída")
+    P10 -->|"Sim"| P11("Conceder ponto permanente (só na primeira vez), salvar automaticamente e liberar a saída")
     P10 -->|"Não"| P12
     P11 --> P12{"Hora do save periódico?"}
     P12 -->|"Sim"| P13("Salvar automaticamente")
@@ -124,13 +126,15 @@ flowchart TD
     Z1 -->|"Volume"| Z3("Alterar o volume geral")
     Z3 --> Z1
     Z1 -->|"Retomar"| X1(["Resultado: retomar a partida"])
-    Z1 -->|"Voltar ao menu principal"| W1("Avisar que o progresso da fase será perdido")
+    Z1 -->|"Voltar ao menu principal"| W1("Avisar que, ao continuar, a fase recomeça do início")
     W1 --> W2{"Jogador confirma?"}
-    W2 -->|"Sim"| X2(["Resultado: voltou ao menu principal"])
+    W2 -->|"Sim"| S1("Salvar o progresso do jogador")
+    S1 --> X2(["Resultado: voltou ao menu principal"])
     W2 -->|"Não"| Z1
-    Z1 -->|"Sair do jogo"| W3("Avisar que o progresso da fase será perdido")
+    Z1 -->|"Sair do jogo"| W3("Avisar que, ao continuar, a fase recomeça do início")
     W3 --> W4{"Jogador confirma?"}
-    W4 -->|"Sim"| X3(["Resultado: saiu do jogo"])
+    W4 -->|"Sim"| S2("Salvar o progresso do jogador")
+    S2 --> X3(["Resultado: saiu do jogo"])
     W4 -->|"Não"| Z1
 
     classDef decisao fill:#fff4d6,stroke:#b8860b,color:#222
@@ -138,7 +142,7 @@ flowchart TD
     classDef res fill:#fff,stroke:#000,stroke-width:3px,color:#222
     classDef no fill:#000,stroke:#000,color:#000
     class Z1,W2,W4 decisao
-    class Z0,Z2,Z3,W1,W3 acao
+    class Z0,Z2,Z3,W1,W3,S1,S2 acao
     class X1,X2,X3 res
     class Inicio no
 ```
@@ -146,6 +150,8 @@ flowchart TD
 ## Observações
 
 - O salvamento periódico acontece em segundo plano no jogo real. Aqui ele aparece como uma verificação dentro do ciclo, para simplificar o desenho.
+- Nível, XP e habilidades temporárias só são zerados ao morrer ou ao avançar de fase. Ao continuar, o jogador retoma com tudo isso restaurado, e não passa pelo reset.
+- Voltar ao menu principal ou sair durante uma fase salva todo o progresso do jogador, mas não a posição nem o estado da fase. Ao continuar, ele retoma do início da fase, com a vida cheia (máximo atual).
+- Ao morrer, o save é atualizado com o progresso temporário zerado antes de a tela de morte aparecer.
 - O comportamento ao concluir a última fase ainda não foi definido, e por isso aparece como "Exibir a tela final da campanha (a definir)".
-- Voltar ao menu principal ou sair durante uma fase faz o jogador perder o progresso daquela fase, porque o estado no meio da fase não é salvo no MVP.
 - Itens fora do MVP (base, moedas, traders, salvamento manual, configurações, seleção de fase) não aparecem nestes diagramas.
